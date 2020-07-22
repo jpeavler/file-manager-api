@@ -10,11 +10,11 @@ use App\Media;
 class MediaController extends Controller
 {
     /**
-     * @param Media $media
+     * @param Media $medium
      * @return MediaResource
      */
-    public function show(Media $media): MediaResource {
-        return new MediaResource($media);
+    public function show(Media $medium) {
+        return new MediaResource($medium);
     }
     /**
      * @return MediaResourceCollection 
@@ -34,5 +34,14 @@ class MediaController extends Controller
         ]);
         $media = Media::create($request->all());
         return new MediaResource($media);
+    }
+    /**
+     * @param Media $medium
+     * @param Request $request
+     * @return MediaResource
+     */
+    public function update(Media $medium, Request $request):MediaResource {
+        $medium->update($request->all());
+        return new MediaResource($medium);
     }
 }
