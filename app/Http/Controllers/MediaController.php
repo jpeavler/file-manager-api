@@ -22,4 +22,17 @@ class MediaController extends Controller
     public function index(): MediaResourceCollection {
         return new MediaResourceCollection(Media::paginate());
     }
+    /**
+     * @param Request $request
+     * @return MediaResource
+     */
+    public function store(Request $request) {
+        $request->validate([
+            'filename' => 'required',
+            'desc' => 'required',
+            's3url' => 'required',
+        ]);
+        $media = Media::create($request->all());
+        return new MediaResource($media);
+    }
 }
