@@ -44,4 +44,13 @@ class MediaController extends Controller
         $medium->update($request->all());
         return new MediaResource($medium);
     }
+    /**
+     * @param Media $medium
+     * @return \Illuminate\Http\JsonResonse
+     * @throws \Exception
+     */
+    public function destroy(Media $medium) {
+        $medium->delete();
+        return response()->json();
+    }
 }
