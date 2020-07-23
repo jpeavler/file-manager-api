@@ -16,12 +16,12 @@ This app was created using PHP and Laravel. When completed, it will be able to s
 
 ## Todo
 
--Setup AWS S3 bucket
--Integrate AWS S3 file storing
--Refactor database and API to accomidate S3 intergration
--Integrate user accounts into database and API to allow 
+- Setup AWS S3 bucket
+- Integrate AWS S3 file storing
+- Refactor database and API to accomidate S3 intergration
+- Integrate user accounts into database and API to allow 
 each user to have their own list of files to use
--Write tests for API
+- Write tests for API
 
 ## Instructions for Running this Project in your Localhost
 
