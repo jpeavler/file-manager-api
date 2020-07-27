@@ -32,7 +32,6 @@ class MediaController extends Controller
             'file' => 'required',
             'filename' => 'required',
             'desc' => 'required',
-            's3url' => 'required',
         ]);
         $path = $request->file('file')->store(
             'files',
