@@ -14,8 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('fileUpload');
 });
+
+Route::post('upload', function(){
+    request()->file('file')->store(
+        'smiley',
+        "s3"
+    );
+})->name('upload');
 
 Auth::routes();
 
