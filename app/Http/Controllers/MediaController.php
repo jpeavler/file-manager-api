@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\MediaResource;
 use App\Http\Resources\MediaResourceCollection;
 use App\Media;
+use Storage;
 
 class MediaController extends Controller
 {
@@ -28,11 +29,20 @@ class MediaController extends Controller
      */
     public function store(Request $request) {
         $request->validate([
+            'file' => 'required',
             'filename' => 'required',
             'desc' => 'required',
             's3url' => 'required',
         ]);
-        $media = Media::create($request->all());
+        $path = $request->file('file')->store(
+            'files',
+            's3'
+        );
+        $media = Media::create([
+            'filename' => $request->filename,
+            's3url' => Storage::disk('s3')->url($path),
+            'desc' => $request->desc,
+            ]);
         return new MediaResource($media);
     }
     /**
