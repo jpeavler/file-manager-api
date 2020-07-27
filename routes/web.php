@@ -19,9 +19,10 @@ Route::get('/', function () {
 
 Route::post('upload', function(){
     request()->file('file')->store(
-        'smiley',
+        'files',
         "s3"
     );
+    return back();
 })->name('upload');
 
 Auth::routes();
