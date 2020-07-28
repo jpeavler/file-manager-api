@@ -1,6 +1,6 @@
 ## File Manager Server
 
-This app was created using PHP and Laravel. When completed, it will be able to support the client's need to upload images and videos. As the app currently stands, it is able to take in CRUD requests through its API to write to a MySQL database. This database stores the file's name, a description of the file, and the URL of where the file is being stored (still need to set up AWS S3 intergration for this value to be usable).
+This app was created using PHP and Laravel. This server allows clients to upload files to an AWS S3 bucket, which then stores the URL's for those uploaded files into a MySQL database. The GET route will return all files saved in the MySQL database, including the S3 bucket URL's. The PUT, PATCH, and DELETE routes will only edit values stored in the MySQL database and won't impact the S3 bucket values at all.
 
 ## API Routes
 
@@ -16,11 +16,8 @@ This app was created using PHP and Laravel. When completed, it will be able to s
 
 ## Todo
 
-- Setup AWS S3 bucket
-- Integrate AWS S3 file storing
-- Refactor database and API to accomidate S3 intergration
-- Integrate user accounts into database and API to allow 
-each user to have their own list of files to use
+- Adjust DELETE route to remove a file from the S3 bucket
+- Integrate user accounts into database and API to allow each user to have their own list of files
 - Write tests for API
 
 ## Instructions for Running this Project in your Localhost
@@ -39,17 +36,20 @@ and navigate to a file you wish to store the cloned repository
 5. Generate a key in your CLI using the command:
     php artisan key:generate
 6. Open up the repository in your preferred Code Editor and locate the .env file
-7. Edit the value of the Key DB_DATABASE to the database name we will create later.
-    I used the value 'file_manager'
-8. Run phpMyAdmin in your localhost using your desired method.
+7. Edit the value for the key DB_DATABASE in your .env file to the database name 
+    we will create later. I used the value 'file_manager'
+8. Edit the values for the keys AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_DEFAULT_REGION,
+    AWS_BUCKET, and AWS_URL in your .env file to values I emailed you. 
+    Alternatively, you can setup your own S3 bucket and fill these values accordingly.
+9. Run phpMyAdmin in your localhost using your desired method.
     I used XAMPP Control Panel since I'm on a windows device
     to run both Apache and MySQL
-9. In phpMyAdmin, create a new MySQL database with the same name you picked in step 7.
+10. In phpMyAdmin, create a new MySQL database with the same name you picked in step 7.
     I used the value 'file_manager'
-10. In your CLI, run the table migrations:
+11. In your CLI, run the table migrations:
     php artisan migrate
-11. Now that your server and database are setup, run the server:
+12. Now that your server and database are setup, run the server:
     php artisan serve
-12. Note the server's URL for frontend connection, mine was http://127.0.0.1:8000
+13. Note the server's URL for frontend connection, mine was http://127.0.0.1:8000
     equivalent to http://localhost:8000
-13. Follow steps for Frontend setup of app at: https://github.com/jpeavler/file-manager-ui
+14. Follow steps for Frontend setup of app at: https://github.com/jpeavler/file-manager-ui
